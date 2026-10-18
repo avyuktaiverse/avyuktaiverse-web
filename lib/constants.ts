@@ -1,11 +1,12 @@
 export const APP_VERSION = "v2.0.0";
 
+/**
+ * Locale-independent company facts. Anything a visitor reads in prose
+ * (tagline, description, nav labels, founder bio) lives in lib/i18n/dictionaries.
+ */
 export const COMPANY = {
   name: "AvyuktAIverse®",
   legalName: "AvyuktAIverse® Private Limited",
-  tagline: "Engineers who think. AI that helps.",
-  description:
-    "AI-enabled engineers, architects, and delivery professionals who work alongside your teams to solve real problems.",
   email: "contact@avyuktaiverse.com",
   supportEmail: "support@avyuktaiverse.com",
   domain: "avyuktaiverse.com",
@@ -14,15 +15,17 @@ export const COMPANY = {
   linkedin: "", // add once created
 } as const;
 
-export const NAV_LINKS = [
-  { label: "Capabilities", href: "/capabilities" },
-  { label: "How We Work", href: "/how-we-work" },
-  { label: "About", href: "/about" },
-  { label: "Insights", href: "/insights" },
-] as const;
+/** Unprefixed route paths; prefix with withLocale(lang, href) when linking. */
+export const ROUTES = {
+  home: "/",
+  capabilities: "/capabilities",
+  howWeWork: "/how-we-work",
+  about: "/about",
+  insights: "/insights",
+  contact: "/contact",
+  privacy: "/privacy",
+} as const;
 
 export const FOUNDER = {
   name: "Sreedhara GS",
-  role: "Founder & Director",
-  bio: "Sreedhara is a global engineering leader with 15+ years of experience directing cross-cultural teams across Japan, Australia, Europe, and India — delivering cloud-native platforms, AI-driven infrastructure, and enterprise SaaS products that generate measurable business and financial impact.",
 } as const;

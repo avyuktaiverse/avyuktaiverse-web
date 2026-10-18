@@ -1,24 +1,28 @@
 import Link from "next/link";
+import { AplMark } from "@/components/ui/apl-mark";
+import type { Locale } from "@/lib/i18n/config";
+import { withLocale } from "@/lib/i18n/paths";
 
-export function Logo({ className }: { className?: string }) {
+/**
+ * Site logo: the APL orbit mark. The accessible name stays the registered
+ * brand (AvyuktAIverse®) via aria-label on the link.
+ */
+export function Logo({
+  lang,
+  ariaLabel,
+  className,
+}: {
+  lang: Locale;
+  ariaLabel: string;
+  className?: string;
+}) {
   return (
     <Link
-      href="/"
-      className={`inline-flex items-baseline group ${className ?? ""}`}
-      aria-label="AvyuktAIverse® — Home"
+      href={withLocale(lang, "/")}
+      className={`inline-flex items-center group transition-opacity duration-300 hover:opacity-90 ${className ?? ""}`}
+      aria-label={ariaLabel}
     >
-      <span className="font-serif text-xl font-medium text-white tracking-tight transition-colors duration-300 group-hover:text-[var(--color-accent,#CCFF00)]">
-        Avyukt
-      </span>
-      <span className="font-sans text-xl font-light text-accent tracking-tight">
-        AIverse
-      </span>
-      <span
-        aria-hidden="true"
-        className="font-sans text-[9px] font-medium text-accent/70 ml-0.5 -translate-y-2 select-none"
-      >
-        ®
-      </span>
+      <AplMark className="h-9 w-auto transition-transform duration-300 group-hover:scale-[1.03]" />
     </Link>
   );
 }

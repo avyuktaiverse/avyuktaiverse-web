@@ -1,33 +1,26 @@
 import { z } from "zod";
+import type { Locale } from "@/lib/i18n/config";
+import { getDictionary } from "@/lib/i18n/get-dictionary";
 
 /**
- * Contact form schema.
- * Used by the server action (`app/contact/action.ts`) to validate
+ * Contact form schema, localized.
+ * Used by the server action (`app/[lang]/contact/action.ts`) to validate
  * submissions before hitting Resend. Length limits guard against
  * abuse and keep message payloads within Resend's body limits.
  */
-export const contactFormSchema = z.object({
-  name: z
-    .string()
-    .trim()
-    .min(2, "Please enter your full name.")
-    .max(120, "Name is too long."),
-  email: z
-    .string()
-    .trim()
-    .email("Please enter a valid email address.")
-    .max(200, "Email is too long."),
-  company: z
-    .string()
-    .trim()
-    .max(160, "Company name is too long.")
-    .optional()
-    .transform((v) => v || ""),
-  message: z
-    .string()
-    .trim()
-    .min(20, "Please share a bit more context (at least 20 characters).")
-    .max(4000, "Message is too long (max 4000 characters)."),
-});
+export function contactFormSchema(lang: Locale) {
+  const v = getDictionary(lang).contact.form.validation;
+  return z.object({
+    name: z.string().trim().min(2, v.nameMin).max(120, v.nameMax),
+    email: z.string().trim().email(v.emailInvalid).max(200, v.emailMax),
+    company: z
+      .string()
+      .trim()
+      .max(160, v.companyMax)
+      .optional()
+      .transform((val) => val || ""),
+    message: z.string().trim().min(20, v.messageMin).max(4000, v.messageMax),
+  });
+}
 
-export type ContactFormValues = z.infer<typeof contactFormSchema>;
+export type ContactFormValues = z.infer<ReturnType<typeof contactFormSchema>>;

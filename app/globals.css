@@ -467,3 +467,50 @@ textarea:-webkit-autofill {
   }
   html { scroll-behavior: auto; }
 }
+
+/* ── Japanese typography ────────────────────────────
+   Applied only when <html lang="ja">. The Latin stack has no CJK glyphs,
+   so swap in Noto; relax tracking/leading, and disable italics (CJK has none). */
+html[lang="ja"] {
+  --hero-h1-size: clamp(2.4rem, 6.5vw, 4.5rem);
+}
+
+html[lang="ja"] body,
+html[lang="ja"] .font-sans,
+html[lang="ja"] h3,
+html[lang="ja"] h4,
+html[lang="ja"] h5,
+html[lang="ja"] h6 {
+  font-family: var(--font-geist), var(--font-noto-sans-jp), "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", system-ui, sans-serif;
+  font-feature-settings: "palt", "ss01", "cv11";
+  letter-spacing: 0.01em;
+}
+
+html[lang="ja"] h1,
+html[lang="ja"] h2,
+html[lang="ja"] .font-serif {
+  font-family: var(--font-fraunces), var(--font-noto-serif-jp), "Hiragino Mincho ProN", "Yu Mincho", "Noto Serif CJK JP", serif;
+  letter-spacing: 0.005em;
+  line-height: 1.22;
+  font-feature-settings: "palt";
+}
+
+html[lang="ja"] .italic {
+  font-style: normal;
+}
+
+html[lang="ja"] h1,
+html[lang="ja"] h2,
+html[lang="ja"] h3,
+html[lang="ja"] blockquote p {
+  word-break: auto-phrase;
+  overflow-wrap: anywhere;
+  line-break: strict;
+}
+
+html[lang="ja"] .tracking-widest {
+  letter-spacing: 0.14em;
+}
+html[lang="ja"] .tracking-wider {
+  letter-spacing: 0.08em;
+}

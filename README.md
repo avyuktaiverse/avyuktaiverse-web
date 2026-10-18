@@ -61,15 +61,18 @@ pnpm dev
 
 ```
 app/                # Next.js App Router routes
-  page.tsx          # Home
-  about/            # About
-  capabilities/     # Capabilities
-  how-we-work/      # Process
-  insights/         # Insights (coming soon)
-  contact/          # Contact page + server action
-  privacy/          # Privacy policy
-  layout.tsx        # Root layout (metadata, fonts, JSON-LD)
+  [lang]/           # Locale segment: /en/... and /ja/...
+    page.tsx        # Home
+    about/          # About
+    capabilities/   # Capabilities
+    how-we-work/    # Process
+    insights/       # Insights (coming soon)
+    contact/        # Contact page + server action
+    privacy/        # Privacy policy
+    layout.tsx      # Root layout (metadata, fonts, JSON-LD)
+    not-found.tsx   # Localized 404 (+ [...rest] catch-all)
   globals.css       # Tokens + Tailwind + base styles
+  sitemap.ts        # Both locales with hreflang alternates
 
 components/
   home/             # Homepage sections (hero, problem, etc.)
@@ -77,7 +80,8 @@ components/
   ui/               # Reusable primitives (button, badge, logo…)
 
 lib/
-  constants.ts      # Company info, nav links, brand constants
+  constants.ts      # Company facts (email, address, routes)
+  i18n/             # Locale config, path helpers, dictionaries (en.ts, ja.ts)
   utils.ts          # cn() and helpers
   seo.ts            # Metadata + JSON-LD helpers
   validation/       # Zod schemas
@@ -86,6 +90,14 @@ hooks/              # Client hooks (scroll reveal…)
 public/             # Static assets
 styles/             # Design tokens (imported by globals.css)
 ```
+
+## Languages
+
+The site is bilingual (English / Japanese). Every page lives under a locale
+prefix — `/en/...` and `/ja/...` — and `proxy.ts` redirects unprefixed URLs
+to the visitor's preferred language (explicit choice cookie → `Accept-Language`
+→ English). All visitor-facing copy lives in `lib/i18n/dictionaries/`;
+`en.ts` is the type source, so a missing Japanese key fails `pnpm typecheck`.
 
 ## Environment variables
 

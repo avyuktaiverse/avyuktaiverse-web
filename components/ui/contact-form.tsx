@@ -1,9 +1,13 @@
 "use client";
 
 import { useActionState } from "react";
-import { submitContactForm, type ContactFormState } from "@/app/contact/action";
+import { submitContactForm, type ContactFormState } from "@/app/[lang]/contact/action";
 import { Button } from "@/components/ui/button";
 import { CheckCircle2 } from "lucide-react";
+import type { Locale } from "@/lib/i18n/config";
+import type { Dictionary } from "@/lib/i18n/get-dictionary";
+
+type ContactFormCopy = Dictionary["contact"]["form"];
 
 const initialState: ContactFormState = { status: "idle" };
 
@@ -12,7 +16,7 @@ const inputClass =
 
 const labelClass = "block text-xs font-sans font-semibold uppercase tracking-widest text-white/40 mb-2";
 
-export function ContactForm() {
+export function ContactForm({ lang, copy }: { lang: Locale; copy: ContactFormCopy }) {
   const [state, formAction, pending] = useActionState(
     submitContactForm,
     initialState
@@ -25,18 +29,19 @@ export function ContactForm() {
           style={{ background: "rgba(52,211,153,0.1)", border: "1px solid rgba(52,211,153,0.2)" }}>
           <CheckCircle2 size={24} style={{ color: "#34d399" }} />
         </div>
-        <p className="font-sans font-semibold text-white mb-2">
-          Message received.
-        </p>
-        <p className="text-white/40 text-sm">
-          We will be in touch within one business day.
-        </p>
+        <p className="font-sans font-semibold text-white mb-2">{copy.successTitle}</p>
+        <p className="text-white/40 text-sm">{copy.successBody}</p>
       </div>
     );
   }
 
+  const fieldError = (field: keyof NonNullable<ContactFormState["fieldErrors"]>) =>
+    state.status === "error" ? state.fieldErrors?.[field] : undefined;
+
   return (
     <form action={formAction} className="space-y-5">
+      {/* Locale for localized validation messages */}
+      <input type="hidden" name="lang" value={lang} />
       {/* Honeypot */}
       <input
         type="text"
@@ -50,7 +55,7 @@ export function ContactForm() {
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
         <div>
           <label htmlFor="name" className={labelClass}>
-            Name <span className="text-accent normal-case tracking-normal">*</span>
+            {copy.name} <span className="text-accent normal-case tracking-normal">*</span>
           </label>
           <input
             id="name"
@@ -59,12 +64,14 @@ export function ContactForm() {
             required
             autoComplete="name"
             className={inputClass}
-            placeholder="Your name"
+            placeholder={copy.namePlaceholder}
+            aria-invalid={fieldError("name") ? true : undefined}
           />
+          {fieldError("name") && <p className="mt-1.5 text-xs text-red-400">{fieldError("name")}</p>}
         </div>
         <div>
           <label htmlFor="email" className={labelClass}>
-            Email <span className="text-accent normal-case tracking-normal">*</span>
+            {copy.email} <span className="text-accent normal-case tracking-normal">*</span>
           </label>
           <input
             id="email"
@@ -73,14 +80,16 @@ export function ContactForm() {
             required
             autoComplete="email"
             className={inputClass}
-            placeholder="you@company.com"
+            placeholder={copy.emailPlaceholder}
+            aria-invalid={fieldError("email") ? true : undefined}
           />
+          {fieldError("email") && <p className="mt-1.5 text-xs text-red-400">{fieldError("email")}</p>}
         </div>
       </div>
 
       <div>
         <label htmlFor="company" className={labelClass}>
-          Company <span className="text-white/20 normal-case tracking-normal font-normal">(optional)</span>
+          {copy.company} <span className="text-white/20 normal-case tracking-normal font-normal">{copy.optional}</span>
         </label>
         <input
           id="company"
@@ -88,13 +97,15 @@ export function ContactForm() {
           type="text"
           autoComplete="organization"
           className={inputClass}
-          placeholder="Your organisation"
+          placeholder={copy.companyPlaceholder}
+          aria-invalid={fieldError("company") ? true : undefined}
         />
+        {fieldError("company") && <p className="mt-1.5 text-xs text-red-400">{fieldError("company")}</p>}
       </div>
 
       <div>
         <label htmlFor="message" className={labelClass}>
-          Requirement / Problem Statement <span className="text-accent normal-case tracking-normal">*</span>
+          {copy.message} <span className="text-accent normal-case tracking-normal">*</span>
         </label>
         <textarea
           id="message"
@@ -102,8 +113,10 @@ export function ContactForm() {
           required
           rows={5}
           className={`${inputClass} resize-none`}
-          placeholder="Please share your specific requirement or the problem you are trying to solve."
+          placeholder={copy.messagePlaceholder}
+          aria-invalid={fieldError("message") ? true : undefined}
         />
+        {fieldError("message") && <p className="mt-1.5 text-xs text-red-400">{fieldError("message")}</p>}
       </div>
 
       {state.status === "error" && (
@@ -111,7 +124,7 @@ export function ContactForm() {
       )}
 
       <Button type="submit" disabled={pending} size="lg" className="w-full sm:w-auto">
-        <span className="relative z-10">{pending ? "Sending…" : "Send Message"}</span>
+        <span className="relative z-10">{pending ? copy.sending : copy.send}</span>
       </Button>
     </form>
   );

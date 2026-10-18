@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-20 0 270 100" fill="none">
+  <defs>
+    <linearGradient id="lime" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#E4FF5A"/><stop offset="1" stop-color="#8FD400"/></linearGradient>
+    <linearGradient id="orbit" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#CCFF00" stop-opacity="0"/><stop offset="0.35" stop-color="#CCFF00" stop-opacity="0.85"/><stop offset="1" stop-color="#CCFF00"/></linearGradient>
+    <filter id="glow" x="-100%" y="-100%" width="300%" height="300%"><feGaussianBlur stdDeviation="3.5"/></filter>
+  </defs>
+  <ellipse cx="54" cy="54" rx="72" ry="22" transform="rotate(-22 54 54)" stroke="#CCFF00" stroke-opacity="0.35" stroke-width="5"/>
+  <path d="M18 88 L54 14 L90 88" stroke="#FFFFFF" stroke-width="15" stroke-linejoin="miter" stroke-miterlimit="6"/>
+  <path d="M37 63 H71" stroke="#FFFFFF" stroke-width="13"/>
+  <path d="M112 88 V14" stroke="#FFFFFF" stroke-width="15"/>
+  <path d="M112 21.5 H142 a20 20 0 0 1 0 40 H112" stroke="#FFFFFF" stroke-width="15" stroke-linejoin="round"/>
+  <path d="M182 14 V80.5 H232" stroke="url(#lime)" stroke-width="15" stroke-linejoin="miter"/>
+  <path d="M120.6 33.2 A72 22 -22 0 1 -12.6 74.8" stroke="url(#orbit)" stroke-width="5.5" stroke-linecap="round"/>
+  <circle cx="82.4" cy="22.4" r="7" fill="#CCFF00" opacity="0.55" filter="url(#glow)"/>
+  <circle cx="82.4" cy="22.4" r="4.2" fill="#E9FF7A"/>
+</svg>

@@ -4,16 +4,23 @@ import { ContactForm } from "@/components/ui/contact-form";
 import { Badge } from "@/components/ui/badge";
 import { COMPANY } from "@/lib/constants";
 import { Mail, ExternalLink, Clock, Shield, Phone, MapPin } from "lucide-react";
+import { getDictionary } from "@/lib/i18n/get-dictionary";
+import { resolveLang, type LangParams } from "@/lib/i18n/params";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Contact",
-  description: "Get in touch with AvyuktAIverse®. No sales scripts — just a straightforward conversation about your engineering challenges.",
-};
+export async function generateMetadata(props: LangParams): Promise<Metadata> {
+  const lang = await resolveLang(props);
+  return pageMetadata(lang, "/contact", getDictionary(lang).contact.meta);
+}
 
 const heroGrad = "var(--gradient-hero)";
 const darkGrad = "var(--gradient-dark)";
 
-export default function ContactPage() {
+export default async function ContactPage(props: LangParams) {
+  const lang = await resolveLang(props);
+  const t = getDictionary(lang);
+  const c = t.contact;
+
   return (
     <>
       <section className="relative overflow-hidden py-24 lg:py-32" style={{ background: heroGrad }}>
@@ -30,13 +37,11 @@ export default function ContactPage() {
 
         <Container className="relative z-10">
           <div className="max-w-2xl">
-            <Badge variant="pulse" className="mb-6">Contact</Badge>
+            <Badge variant="pulse" className="mb-6">{c.badge}</Badge>
             <h1 className="font-serif font-bold text-white mb-5" style={{ fontSize: "clamp(2.4rem, 6vw, 4rem)" }}>
-              Let&apos;s have a{" "}<span className="gradient-text italic">real conversation.</span>
+              {c.titleStart}<span className="gradient-text italic">{c.titleAccent}</span>{c.titleEnd}
             </h1>
-            <p className="text-lg text-white/50 leading-relaxed">
-              Please share your contact details and a brief outline of your business requirement or engineering challenge. We review every submission thoroughly to plan and ensure our very first conversation is highly productive. No sales scripts. No pressure.
-            </p>
+            <p className="text-lg text-white/50 leading-relaxed">{c.lead}</p>
           </div>
         </Container>
       </section>
@@ -46,26 +51,26 @@ export default function ContactPage() {
         <Container>
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-16">
             <div className="lg:col-span-2 reveal">
-              <h2 className="text-2xl font-serif font-bold text-white mb-8">Send us a message</h2>
-              <ContactForm />
+              <h2 className="text-2xl font-serif font-bold text-white mb-8">{c.formHeading}</h2>
+              <ContactForm lang={lang} copy={c.form} />
             </div>
 
             <div className="lg:pt-10 flex flex-col gap-5 reveal" style={{ transitionDelay: "0.15s" }}>
               <div className="glass-card p-6">
                 <div className="flex items-center gap-2 mb-3">
                   <Mail size={15} style={{ color: "#CCFF00" }} />
-                  <p className="text-xs font-sans font-semibold uppercase tracking-widest" style={{ color: "#CCFF00" }}>Direct Email</p>
+                  <p className="text-xs font-sans font-semibold uppercase tracking-widest" style={{ color: "#CCFF00" }}>{c.directEmail}</p>
                 </div>
                 <div className="flex flex-col gap-2">
                   <a href={`mailto:${COMPANY.email}`} className="text-white/60 hover:text-white transition-colors text-sm break-all">{COMPANY.email}</a>
-                  <a href={`mailto:${COMPANY.supportEmail}`} className="text-white/60 hover:text-white transition-colors text-sm break-all">{COMPANY.supportEmail} <span className="text-white/40">(Support)</span></a>
+                  <a href={`mailto:${COMPANY.supportEmail}`} className="text-white/60 hover:text-white transition-colors text-sm break-all">{COMPANY.supportEmail} <span className="text-white/40">({c.support})</span></a>
                 </div>
               </div>
 
               <div className="glass-card p-6">
                 <div className="flex items-center gap-2 mb-3">
                   <Phone size={15} style={{ color: "#CCFF00" }} />
-                  <p className="text-xs font-sans font-semibold uppercase tracking-widest" style={{ color: "#CCFF00" }}>Phone</p>
+                  <p className="text-xs font-sans font-semibold uppercase tracking-widest" style={{ color: "#CCFF00" }}>{c.phone}</p>
                 </div>
                 <a href={`tel:${COMPANY.phone.replace(/[-+ \s]/g, '')}`} className="text-white/60 hover:text-white transition-colors text-sm">{COMPANY.phone}</a>
               </div>
@@ -73,7 +78,7 @@ export default function ContactPage() {
               <div className="glass-card p-6">
                 <div className="flex items-center gap-2 mb-3">
                   <MapPin size={15} style={{ color: "#CCFF00" }} />
-                  <p className="text-xs font-sans font-semibold uppercase tracking-widest" style={{ color: "#CCFF00" }}>Location</p>
+                  <p className="text-xs font-sans font-semibold uppercase tracking-widest" style={{ color: "#CCFF00" }}>{c.location}</p>
                 </div>
                 <p className="text-white/60 text-sm leading-relaxed">
                   <strong className="block text-white/80 font-medium mb-1 font-sans">{COMPANY.legalName}</strong>
@@ -85,26 +90,26 @@ export default function ContactPage() {
                 <div className="glass-card p-6">
                   <div className="flex items-center gap-2 mb-3">
                     <ExternalLink size={15} style={{ color: "#CCFF00" }} />
-                    <p className="text-xs font-sans font-semibold uppercase tracking-widest" style={{ color: "#CCFF00" }}>LinkedIn</p>
+                    <p className="text-xs font-sans font-semibold uppercase tracking-widest" style={{ color: "#CCFF00" }}>{c.linkedin}</p>
                   </div>
-                  <a href={COMPANY.linkedin} target="_blank" rel="noopener noreferrer" className="text-white/60 hover:text-white transition-colors text-sm">AvyuktAIverse®</a>
+                  <a href={COMPANY.linkedin} target="_blank" rel="noopener noreferrer" className="text-white/60 hover:text-white transition-colors text-sm">{COMPANY.name}</a>
                 </div>
               )}
 
               <div className="glass-card p-6">
                 <div className="flex items-center gap-2 mb-3">
                   <Clock size={15} style={{ color: "#CCFF00" }} />
-                  <p className="text-xs font-sans font-semibold uppercase tracking-widest" style={{ color: "#CCFF00" }}>Response Time</p>
+                  <p className="text-xs font-sans font-semibold uppercase tracking-widest" style={{ color: "#CCFF00" }}>{c.responseTime}</p>
                 </div>
-                <p className="text-sm text-white/50 leading-relaxed">We respond to all enquiries within one business day.</p>
+                <p className="text-sm text-white/50 leading-relaxed">{c.responseBody}</p>
               </div>
 
               <div className="glass-card p-6">
                 <div className="flex items-center gap-2 mb-3">
                   <Shield size={15} style={{ color: "#CCFF00" }} />
-                  <p className="text-xs font-sans font-semibold uppercase tracking-widest" style={{ color: "#CCFF00" }}>Honest Assessment</p>
+                  <p className="text-xs font-sans font-semibold uppercase tracking-widest" style={{ color: "#CCFF00" }}>{c.honest}</p>
                 </div>
-                <p className="text-sm text-white/45 leading-relaxed">We do not take every enquiry. If we are not the right fit for your situation, we will say so honestly and quickly.</p>
+                <p className="text-sm text-white/45 leading-relaxed">{c.honestBody}</p>
               </div>
             </div>
           </div>

@@ -3,8 +3,13 @@ import { Container } from "@/components/layout/container";
 import { Badge } from "@/components/ui/badge";
 import { ArrowRight, Sparkles } from "lucide-react";
 import { HeroClient } from "@/components/home/hero-client";
+import { ROUTES } from "@/lib/constants";
+import type { Locale } from "@/lib/i18n/config";
+import type { Dictionary } from "@/lib/i18n/get-dictionary";
+import { withLocale } from "@/lib/i18n/paths";
 
-export function Hero() {
+export function Hero({ lang, t }: { lang: Locale; t: Dictionary }) {
+  const h = t.home.hero;
   return (
     <section
       className="relative overflow-hidden"
@@ -37,28 +42,26 @@ export function Hero() {
             <div className="mb-6 animate-fade-in-up" style={{ animationDelay: "60ms" }}>
               <Badge variant="pulse">
                 <Sparkles size={12} className="mr-1.5" />
-                AI-Enabled Capability Extension
+                {h.badge}
               </Badge>
             </div>
 
             <h1
               className="font-serif font-bold text-white mb-6 leading-[1.05] animate-fade-in-up"
               style={{
-                fontSize: "clamp(2.8rem, 8vw, 6rem)",
+                fontSize: "var(--hero-h1-size, clamp(2.8rem, 8vw, 6rem))",
                 animationDelay: "140ms",
               }}
             >
-              Engineering capability,{" "}
-              <span className="gradient-text italic">extended intelligently.</span>
+              {h.titleStart}
+              <span className="gradient-text italic">{h.titleAccent}</span>
             </h1>
 
             <p
               className="text-lg lg:text-xl text-white/55 leading-relaxed max-w-2xl mb-10 animate-fade-in-up"
               style={{ animationDelay: "240ms" }}
             >
-              We work alongside your engineering teams — as architects, engineers,
-              and delivery leads — bringing AI-enabled capability where you need it
-              most. No hype. No shortcuts. Just people who know what they are doing.
+              {h.lead}
             </p>
 
             <div
@@ -66,19 +69,19 @@ export function Hero() {
               style={{ animationDelay: "340ms" }}
             >
               <Link
-                href="/capabilities"
+                href={withLocale(lang, ROUTES.capabilities)}
                 className="btn-gradient inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl font-sans font-semibold"
               >
                 <span className="relative z-10 inline-flex items-center gap-2">
-                  See Our Capabilities{" "}
+                  {h.primaryCta}{" "}
                   <ArrowRight size={16} className="transition-transform duration-300 group-hover:translate-x-1" />
                 </span>
               </Link>
               <Link
-                href="/contact"
+                href={withLocale(lang, ROUTES.contact)}
                 className="inline-flex items-center justify-center gap-2 px-7 py-3.5 bg-white/[0.04] text-white border border-white/15 rounded-xl font-sans font-medium hover:bg-white/[0.08] hover:border-white/30 hover:-translate-y-0.5 transition-all duration-300"
               >
-                Get in Touch
+                {t.common.getInTouch}
               </Link>
             </div>
 
@@ -87,11 +90,7 @@ export function Hero() {
               className="flex flex-col sm:flex-row gap-6 sm:gap-0 animate-fade-in-up"
               style={{ animationDelay: "460ms" }}
             >
-              {[
-                { value: "3", label: "Engagement Models" },
-                { value: "AI", label: "Enabled Delivery" },
-                { value: "Trust", label: "First Approach" },
-              ].map((stat, i) => (
+              {h.stats.map((stat, i) => (
                 <div
                   key={stat.label}
                   className={i > 0 ? "sm:pl-8 sm:ml-8 sm:border-l sm:border-white/10" : ""}

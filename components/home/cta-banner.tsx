@@ -1,20 +1,23 @@
 import Link from "next/link";
 import { Container } from "@/components/layout/container";
 import { ArrowRight, Sparkles } from "lucide-react";
+import { ROUTES } from "@/lib/constants";
+import type { Locale } from "@/lib/i18n/config";
+import type { Dictionary } from "@/lib/i18n/get-dictionary";
+import { withLocale } from "@/lib/i18n/paths";
 
 interface CtaBannerProps {
+  lang: Locale;
+  t: Dictionary;
+  /** Override the default home-page copy (e.g. per-page CTA). */
   title?: string;
   subtitle?: string;
   label?: string;
   href?: string;
 }
 
-export function CtaBanner({
-  title = "Have a challenge worth solving?",
-  subtitle = "We do not use sales scripts. If the problem is real and the conversation is honest, we would like to hear from you.",
-  label = "Start a conversation",
-  href = "/contact",
-}: CtaBannerProps) {
+export function CtaBanner({ lang, t, title, subtitle, label, href = ROUTES.contact }: CtaBannerProps) {
+  const c = t.home.cta;
   return (
     <section
       className="relative overflow-hidden py-24 lg:py-32"
@@ -42,18 +45,18 @@ export function CtaBanner({
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-8"
             style={{ background: "rgba(204,255,0,0.06)", border: "1px solid rgba(204,255,0,0.30)" }}>
             <Sparkles size={14} style={{ color: "#CCFF00" }} />
-            <span className="text-xs font-mono font-semibold uppercase tracking-wider" style={{ color: "#CCFF00" }}>Ready to talk?</span>
+            <span className="text-xs font-mono font-semibold uppercase tracking-wider" style={{ color: "#CCFF00" }}>{c.ready}</span>
           </div>
 
           <h2 className="font-serif font-bold text-white mb-4 leading-tight"
             style={{ fontSize: "clamp(2rem, 5vw, 3.25rem)" }}>
-            {title}
+            {title ?? c.title}
           </h2>
-          <p className="text-white/50 text-lg mb-10 leading-relaxed">{subtitle}</p>
-          <Link href={href}
+          <p className="text-white/50 text-lg mb-10 leading-relaxed">{subtitle ?? c.subtitle}</p>
+          <Link href={withLocale(lang, href)}
             className="btn-gradient inline-flex items-center gap-2 px-8 py-4 rounded-xl font-sans font-semibold">
             <span className="relative z-10 inline-flex items-center gap-2">
-              {label} <ArrowRight size={16} />
+              {label ?? c.label} <ArrowRight size={16} />
             </span>
           </Link>
         </div>
