@@ -29,6 +29,12 @@ export const en = {
     bio: "Sreedhara is a global engineering leader with 15+ years of experience directing cross-cultural teams across Japan, Australia, Europe, and India — delivering cloud-native platforms, AI-driven infrastructure, and enterprise SaaS products that generate measurable business and financial impact.",
   },
 
+  advisor: {
+    name: "Kuniaki Kudo",
+    role: "Chief Corporate Advisor",
+    bio: "Kuniaki is a technology leader with 35+ years of software engineering and engineering leadership across the United States and Japan — from Apple, Adobe, Sony, and Autodesk to leading large-scale enterprise modernization, DevOps, and quality engineering, alongside doctoral research on the continuous modernization of enterprise systems.",
+  },
+
   common: {
     skipToContent: "Skip to content",
     getInTouch: "Get in Touch",
@@ -358,6 +364,26 @@ export const en = {
         { value: "40%", label: "MTTR Reduction", note: "AI-Driven SRE" },
         { value: "50%", label: "Operational Cost Savings", note: "AI-Driven SRE" },
       ],
+      advisor: {
+        heading: "Modernizing the Enterprise, Continuously",
+        highlights: [
+          "35+ Years Across Japan & the US",
+          "Enterprise Modernization & DevOps",
+          "Apple · Adobe · Sony · Autodesk Alumni",
+          "Ph.D. Researcher, University of Tsukuba",
+        ],
+        paragraphs: [
+          "Kuniaki is a technology leader with more than three decades of software engineering, system architecture, and engineering leadership across the United States and Japan. He leads global engineering teams through large-scale enterprise system modernization — preserving critical business functionality while introducing DevOps, CI/CD, test automation, cloud infrastructure, and security practices that let legacy systems evolve continuously.",
+          "His career spans some of the world's most demanding engineering organizations: Apple (Final Cut effects architecture), Adobe (Photoshop quality engineering), Sony (PS3/PS4 test tooling and a cross-platform eBook reader), Autodesk (Inventor build engineering), and athenahealth, where he led development of a clinical application used by 60% of US physicians at 900K sessions a day. At Marelli he managed the global IT sustainability team, introducing Agile and DevOps across the company's systems. He currently serves as corporate adviser to a major Japanese enterprise group, directing its large-scale system modernization programme.",
+          "He bridges industry and academia: a Ph.D. candidate in Computer Science at the University of Tsukuba researching Continuous Modernization of Large-Scale Enterprise Systems, with an MS in Computer Science from the University of Texas at Austin, an MBA from the University of Manchester, and a BS in Mathematics from Tokyo University of Science. His 2026 peer-reviewed work on scalable CI/CD for legacy modernization (IEICE Transactions) and serverless parallel UI testing (IISA 2026), together with AI research in collaboration with UC Irvine, directly informs how AvyuktAIverse® approaches enterprise engineering.",
+        ],
+        stats: [
+          { value: "35+", label: "Years in Engineering", note: "US & Japan" },
+          { value: "10+", label: "Global Tech Companies", note: "Apple · Adobe · Sony · Autodesk" },
+          { value: "2", label: "Peer-Reviewed Papers", note: "IEICE & IISA, 2026" },
+          { value: "900K", label: "Daily Sessions Served", note: "athenahealth Essentials" },
+        ],
+      },
     },
     details: {
       eyebrow: "Company Details",

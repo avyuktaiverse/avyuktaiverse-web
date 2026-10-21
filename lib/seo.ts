@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { COMPANY, FOUNDER } from "@/lib/constants";
+import { ADVISOR, COMPANY, FOUNDER } from "@/lib/constants";
 import { localeTags, type Locale } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/get-dictionary";
 import { alternatesFor, withLocale } from "@/lib/i18n/paths";
@@ -33,7 +33,30 @@ export function organizationJsonLd(lang: Locale) {
       jobTitle: t.founder.role,
       description: t.founder.bio,
     },
+    member: [
+      {
+        "@type": "Person",
+        name: ADVISOR.name,
+        jobTitle: t.advisor.role,
+        description: t.advisor.bio,
+      },
+    ],
     sameAs: COMPANY.linkedin ? [COMPANY.linkedin] : [],
+  } as const;
+}
+
+function personSchema(person: { name: string; role: string; bio: string }) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    name: person.name,
+    jobTitle: person.role,
+    description: person.bio,
+    worksFor: {
+      "@type": "Organization",
+      "@id": `https://${COMPANY.domain}#organization`,
+      name: COMPANY.name,
+    },
   } as const;
 }
 
@@ -42,18 +65,15 @@ export function organizationJsonLd(lang: Locale) {
  */
 export function personJsonLd(lang: Locale) {
   const t = getDictionary(lang);
-  return {
-    "@context": "https://schema.org",
-    "@type": "Person",
-    name: FOUNDER.name,
-    jobTitle: t.founder.role,
-    description: t.founder.bio,
-    worksFor: {
-      "@type": "Organization",
-      "@id": `https://${COMPANY.domain}#organization`,
-      name: COMPANY.name,
-    },
-  } as const;
+  return personSchema({ name: FOUNDER.name, role: t.founder.role, bio: t.founder.bio });
+}
+
+/**
+ * Person JSON-LD for the Chief Corporate Advisor — used on /about.
+ */
+export function advisorJsonLd(lang: Locale) {
+  const t = getDictionary(lang);
+  return personSchema({ name: ADVISOR.name, role: t.advisor.role, bio: t.advisor.bio });
 }
 
 /**

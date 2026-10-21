@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [2.0.0] — Unreleased — Revamp
 
 ### Added
+- Leadership: Kuniaki Kudo joins as Chief Corporate Advisor — bilingual profile card on `/about`, Person JSON-LD, Organization `member`, and `llms.txt` entry.
 - Design token system in `styles/tokens.css` consumed by Tailwind v4 `@theme`.
 - `lib/seo.ts` — metadata + JSON-LD helpers (`organizationJsonLd`, `personJsonLd`).
 - `lib/validation/contact.ts` — Zod schema for the contact form.

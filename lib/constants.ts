@@ -29,3 +29,7 @@ export const ROUTES = {
 export const FOUNDER = {
   name: "Sreedhara GS",
 } as const;
+
+export const ADVISOR = {
+  name: "Kuniaki Kudo",
+} as const;

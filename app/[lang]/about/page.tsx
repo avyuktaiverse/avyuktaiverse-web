@@ -2,11 +2,11 @@ import type { Metadata } from "next";
 import { Container } from "@/components/layout/container";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { Badge } from "@/components/ui/badge";
-import { COMPANY, FOUNDER } from "@/lib/constants";
-import { Lightbulb, Rocket, Shield, Clock, User } from "lucide-react";
+import { ADVISOR, COMPANY, FOUNDER } from "@/lib/constants";
+import { Lightbulb, Rocket, Shield, Clock, User, GraduationCap } from "lucide-react";
 import { getDictionary } from "@/lib/i18n/get-dictionary";
 import { resolveLang, type LangParams } from "@/lib/i18n/params";
-import { pageMetadata, personJsonLd } from "@/lib/seo";
+import { advisorJsonLd, pageMetadata, personJsonLd } from "@/lib/seo";
 
 export async function generateMetadata(props: LangParams): Promise<Metadata> {
   const lang = await resolveLang(props);
@@ -26,16 +26,44 @@ const valueMeta = [
 
 const highlightDots = ["bg-[#CCFF00]", "bg-emerald-400", "bg-[#7EA5FF]", "bg-amber-400"];
 
+/** Per-person accent so the two leadership cards read as a pair, not a duplicate. */
+const personAccent = {
+  founder: { Icon: User, color: "#CCFF00", bg: "rgba(204,255,0,0.08)", border: "rgba(204,255,0,0.25)", glow: "0 0 30px rgba(204,255,0,0.18)" },
+  advisor: { Icon: GraduationCap, color: "#7EA5FF", bg: "rgba(126,165,255,0.08)", border: "rgba(126,165,255,0.3)", glow: "0 0 30px rgba(126,165,255,0.22)" },
+} as const;
+
 export default async function AboutPage(props: LangParams) {
   const lang = await resolveLang(props);
   const t = getDictionary(lang);
   const a = t.about;
+
+  const people = [
+    {
+      key: "founder" as const,
+      name: FOUNDER.name,
+      role: t.founder.role,
+      heading: a.leadership.heading,
+      highlights: a.leadership.highlights,
+      paragraphs: a.leadership.paragraphs,
+      stats: a.leadership.stats,
+    },
+    {
+      key: "advisor" as const,
+      name: ADVISOR.name,
+      role: t.advisor.role,
+      ...a.leadership.advisor,
+    },
+  ];
 
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd(lang)) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(advisorJsonLd(lang)) }}
       />
       <section className="relative overflow-hidden py-24 lg:py-32" style={{ background: heroGrad }}>
         <div className="hero-shape w-[380px] h-[380px]"
@@ -98,45 +126,56 @@ export default async function AboutPage(props: LangParams) {
         <div className="section-divider absolute top-0 left-0 right-0" />
         <Container>
           <SectionHeading eyebrow={a.leadership.eyebrow} title={a.leadership.title} dark />
-          <div className="gradient-border-card reveal hover:scale-[1.01] transition-transform duration-500">
-            <div className="gradient-border-card-inner p-8 lg:p-12">
-              <div className="flex flex-col lg:flex-row gap-10">
-                <div className="lg:w-1/3 flex-shrink-0">
-                  <div className="w-20 h-20 rounded-full flex items-center justify-center mb-6 shadow-[0_0_30px_rgba(204,255,0,0.18)]"
-                    style={{ background: "rgba(204,255,0,0.08)", border: "1px solid rgba(204,255,0,0.25)" }}>
-                    <User size={32} style={{ color: "#CCFF00" }} />
-                  </div>
-                  <h3 className="font-serif font-bold text-white text-2xl mb-1 mt-4">{FOUNDER.name}</h3>
-                  <p className="text-xs mb-6 gradient-text font-semibold uppercase tracking-widest">{t.founder.role}</p>
-                  <div className="flex flex-col gap-3 text-white/50 text-sm">
-                    {a.leadership.highlights.map((item, i) => (
-                      <p key={item} className="flex items-center gap-2">
-                        <span className={`w-1.5 h-1.5 rounded-full opacity-80 ${highlightDots[i] ?? highlightDots[0]}`}></span>
-                        {item}
-                      </p>
-                    ))}
-                  </div>
-                </div>
-                <div className="lg:w-2/3 border-t lg:border-t-0 lg:border-l border-white/[0.05] pt-8 lg:pt-0 lg:pl-10">
-                  <h4 className="text-white font-sans font-semibold text-lg mb-4">{a.leadership.heading}</h4>
-                  <div className="space-y-4 text-white/60 leading-relaxed text-[15px]">
-                    {a.leadership.paragraphs.map((p) => (
-                      <p key={p.slice(0, 24)}>{p}</p>
-                    ))}
-                  </div>
-
-                  <div className="mt-8 grid grid-cols-2 gap-4">
-                    {a.leadership.stats.map((s) => (
-                      <div key={s.label} className="p-5 rounded-xl glass-card transition-colors duration-300 hover:bg-white/[0.04]">
-                        <p className="text-3xl font-bold text-white mb-1" style={{ fontFamily: "var(--font-fraunces)" }}>{s.value}</p>
-                        <p className="text-xs text-white/40 uppercase tracking-widest font-semibold">{s.label}</p>
-                        {s.note ? <p className="text-[11px] text-white/25 mt-1">{s.note}</p> : null}
+          <div className="space-y-8">
+            {people.map((person, idx) => {
+              const accent = personAccent[person.key];
+              return (
+                <div key={person.key} className="gradient-border-card reveal hover:scale-[1.01] transition-transform duration-500"
+                  style={{ transitionDelay: `${idx * 0.1}s` }}>
+                  <div className="gradient-border-card-inner p-8 lg:p-12">
+                    <div className="flex flex-col lg:flex-row gap-10">
+                      <div className="lg:w-1/3 flex-shrink-0">
+                        <div className="w-20 h-20 rounded-full flex items-center justify-center mb-6"
+                          style={{ background: accent.bg, border: `1px solid ${accent.border}`, boxShadow: accent.glow }}>
+                          <accent.Icon size={32} style={{ color: accent.color }} />
+                        </div>
+                        <h3 className="font-serif font-bold text-white text-2xl mb-1 mt-4">{person.name}</h3>
+                        <p className={`text-xs mb-6 font-semibold uppercase tracking-widest ${person.key === "founder" ? "gradient-text" : ""}`}
+                          style={person.key === "founder" ? undefined : { color: accent.color }}>
+                          {person.role}
+                        </p>
+                        <div className="flex flex-col gap-3 text-white/50 text-sm">
+                          {person.highlights.map((item, i) => (
+                            <p key={item} className="flex items-center gap-2">
+                              <span className={`w-1.5 h-1.5 rounded-full opacity-80 ${highlightDots[i] ?? highlightDots[0]}`}></span>
+                              {item}
+                            </p>
+                          ))}
+                        </div>
                       </div>
-                    ))}
+                      <div className="lg:w-2/3 border-t lg:border-t-0 lg:border-l border-white/[0.05] pt-8 lg:pt-0 lg:pl-10">
+                        <h4 className="text-white font-sans font-semibold text-lg mb-4">{person.heading}</h4>
+                        <div className="space-y-4 text-white/60 leading-relaxed text-[15px]">
+                          {person.paragraphs.map((p) => (
+                            <p key={p.slice(0, 24)}>{p}</p>
+                          ))}
+                        </div>
+
+                        <div className="mt-8 grid grid-cols-2 gap-4">
+                          {person.stats.map((s) => (
+                            <div key={s.label} className="p-5 rounded-xl glass-card transition-colors duration-300 hover:bg-white/[0.04]">
+                              <p className="text-3xl font-bold text-white mb-1" style={{ fontFamily: "var(--font-fraunces)" }}>{s.value}</p>
+                              <p className="text-xs text-white/40 uppercase tracking-widest font-semibold">{s.label}</p>
+                              {s.note ? <p className="text-[11px] text-white/25 mt-1">{s.note}</p> : null}
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </div>
+              );
+            })}
           </div>
         </Container>
       </section>

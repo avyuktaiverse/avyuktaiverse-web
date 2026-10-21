@@ -11,6 +11,7 @@ who apply AI thoughtfully to solve real problems.
 - Website: https://avyuktaiverse.com
 - Contact: contact@avyuktaiverse.com
 - Founder: Sreedhara GS (Founder & Director)
+- Chief Corporate Advisor: Kuniaki Kudo
 
 ## What we do
 - Primary: AI-Enabled Talent & Capability Extension
@@ -23,7 +24,7 @@ who apply AI thoughtfully to solve real problems.
 - AI as enabler, not answer
 
 ## Content
-- /about — company story, founder bio, values
+- /about — company story, leadership bios (founder, chief corporate advisor), values
 - /capabilities — engineering and integration capability
 - /how-we-work — four-stage process
 - /insights — (coming soon) perspectives on AI + engineering
