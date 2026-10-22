@@ -58,7 +58,7 @@ export function LanguageSwitcher({
             }}
             className={cn(
               "rounded-full font-semibold tracking-wide transition-colors duration-200",
-              size === "lg" ? "px-4 py-2 text-sm" : "px-2 sm:px-2.5 py-1 text-[11px]",
+              size === "lg" ? "px-4 py-2 text-sm" : "px-1.5 sm:px-2.5 py-1 text-[11px]",
               active
                 ? "bg-accent/15 text-accent"
                 : "text-white/45 hover:text-white"

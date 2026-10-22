@@ -38,9 +38,9 @@ export function Logo({
       aria-label={ariaLabel}
       title={`APL — ${COMPANY.legalName}`}
     >
-      <AplMark className="h-6 sm:h-7 w-auto transition-transform duration-300 group-hover:scale-[1.03]" />
+      <AplMark className="h-8 sm:h-7 w-auto transition-transform duration-300 group-hover:scale-[1.03]" />
       <span className={`flex flex-col leading-none border-l border-white/[0.14] ${compactOnPhone ? "ml-2 pl-2 sm:ml-2.5 sm:pl-2.5" : "ml-2.5 pl-2.5"}`}>
-        <span className={`font-serif font-semibold text-white tracking-tight whitespace-nowrap ${compactOnPhone ? "text-[12.5px] sm:text-[14px]" : "text-[14px]"}`}>
+        <span className={`font-serif font-semibold text-white tracking-tight whitespace-nowrap ${compactOnPhone ? "text-[12px] sm:text-[14px]" : "text-[14px]"}`}>
           {COMPANY.name}
         </span>
         <span className={`mt-[3px] font-sans text-[8px] font-semibold uppercase tracking-[0.22em] text-white/40 whitespace-nowrap ${compactOnPhone ? "hidden sm:block" : ""}`}>
