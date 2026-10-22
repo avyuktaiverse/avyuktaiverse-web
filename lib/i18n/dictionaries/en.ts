@@ -301,6 +301,13 @@ export const en = {
         "The story, people, and values behind AvyuktAIverse® — built for durability, not speed.",
     },
     badge: "About",
+    sectionNav: {
+      aria: "On this page",
+      story: "Our story",
+      values: "Values",
+      leadership: "Who we are",
+      details: "Company details",
+    },
     titleStart: "Built for ",
     titleAccent: "durability",
     titleEnd: ", not speed.",

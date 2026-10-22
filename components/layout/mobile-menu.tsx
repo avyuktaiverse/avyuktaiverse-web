@@ -24,11 +24,11 @@ export function MobileMenu({ lang, links, contactHref, labels }: MobileMenuProps
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="lg:hidden flex items-center gap-2">
+    <div className="lg:hidden flex items-center gap-1">
       <LanguageSwitcher current={lang} ariaLabel={labels.language} />
       <button
         onClick={() => setOpen(true)}
-        className="p-2 text-white/60 hover:text-white transition-colors"
+        className="p-1.5 -mr-1.5 text-white/60 hover:text-white transition-colors"
         aria-label={labels.open}
       >
         <Menu size={22} />

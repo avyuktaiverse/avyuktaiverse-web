@@ -303,6 +303,13 @@ export const ja: Dictionary = {
         "AvyuktAIverse®の背景にある物語、人、価値観。速さではなく、持続性のために。",
     },
     badge: "会社概要",
+    sectionNav: {
+      aria: "このページ内",
+      story: "私たちの物語",
+      values: "価値観",
+      leadership: "私たちについて",
+      details: "会社情報",
+    },
     titleStart: "速さではなく、",
     titleAccent: "持続性",
     titleEnd: "のために。",

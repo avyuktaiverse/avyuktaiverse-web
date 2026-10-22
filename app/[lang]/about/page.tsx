@@ -3,6 +3,7 @@ import Image from "next/image";
 import { Container } from "@/components/layout/container";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { Badge } from "@/components/ui/badge";
+import { SectionNav } from "@/components/ui/section-nav";
 import { ADVISOR, COMPANY, FOUNDER } from "@/lib/constants";
 import { Lightbulb, Rocket, Shield, Clock } from "lucide-react";
 import { getDictionary } from "@/lib/i18n/get-dictionary";
@@ -87,7 +88,17 @@ export default async function AboutPage(props: LangParams) {
         </Container>
       </section>
 
-      <section className="relative py-20 lg:py-28" style={{ background: darkGrad }}>
+      <SectionNav
+        ariaLabel={a.sectionNav.aria}
+        items={[
+          { id: "story", label: a.sectionNav.story },
+          { id: "values", label: a.sectionNav.values },
+          { id: "leadership", label: a.sectionNav.leadership },
+          { id: "details", label: a.sectionNav.details },
+        ]}
+      />
+
+      <section id="story" className="relative py-20 lg:py-28 scroll-mt-28" style={{ background: darkGrad }}>
         <div className="section-divider absolute top-0 left-0 right-0" />
         <Container narrow>
           <SectionHeading eyebrow={a.story.eyebrow} title={a.story.title} dark />
@@ -99,7 +110,7 @@ export default async function AboutPage(props: LangParams) {
         </Container>
       </section>
 
-      <section className="relative py-20 lg:py-28" style={{ background: heroGrad }}>
+      <section id="values" className="relative py-20 lg:py-28 scroll-mt-28" style={{ background: heroGrad }}>
         <div className="section-divider absolute top-0 left-0 right-0" />
         <Container>
           <SectionHeading eyebrow={a.values.eyebrow} title={a.values.title} subtitle={a.values.subtitle} dark />
@@ -121,7 +132,7 @@ export default async function AboutPage(props: LangParams) {
         </Container>
       </section>
 
-      <section className="relative py-20 lg:py-28" style={{ background: darkGrad }}>
+      <section id="leadership" className="relative py-20 lg:py-28 scroll-mt-28" style={{ background: darkGrad }}>
         <div className="section-divider absolute top-0 left-0 right-0" />
         <Container>
           <SectionHeading eyebrow={a.leadership.eyebrow} title={a.leadership.title} subtitle={a.leadership.subtitle} dark />
@@ -191,7 +202,7 @@ export default async function AboutPage(props: LangParams) {
         </Container>
       </section>
 
-      <section className="relative py-16" style={{ background: heroGrad }}>
+      <section id="details" className="relative py-16 scroll-mt-28" style={{ background: heroGrad }}>
         <div className="section-divider absolute top-0 left-0 right-0" />
         <Container narrow>
           <p className="text-xs font-sans font-semibold uppercase tracking-widest mb-6" style={{ color: "#CCFF00" }}>{a.details.eyebrow}</p>

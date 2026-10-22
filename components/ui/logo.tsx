@@ -24,9 +24,12 @@ export function Logo({
   lang: Locale;
   ariaLabel: string;
   className?: string;
+  /** "md": compact single-line wordmark on phones, full lock-up from sm up. "always": full lock-up everywhere. */
   wordmark?: "md" | "always";
 }) {
-  const wordmarkDisplay = wordmark === "always" ? "flex" : "hidden md:flex";
+  // "md" keeps the full two-line lock-up from sm up and a compact single-line
+  // wordmark on phones; "always" shows the full lock-up everywhere.
+  const compactOnPhone = wordmark !== "always";
 
   return (
     <Link
@@ -35,12 +38,12 @@ export function Logo({
       aria-label={ariaLabel}
       title={`APL — ${COMPANY.legalName}`}
     >
-      <AplMark className="h-7 w-auto transition-transform duration-300 group-hover:scale-[1.03]" />
-      <span className={`${wordmarkDisplay} flex-col leading-none ml-2.5 pl-2.5 border-l border-white/[0.14]`}>
-        <span className="font-serif font-semibold text-white text-[14px] tracking-tight whitespace-nowrap">
+      <AplMark className="h-6 sm:h-7 w-auto transition-transform duration-300 group-hover:scale-[1.03]" />
+      <span className={`flex flex-col leading-none border-l border-white/[0.14] ${compactOnPhone ? "ml-2 pl-2 sm:ml-2.5 sm:pl-2.5" : "ml-2.5 pl-2.5"}`}>
+        <span className={`font-serif font-semibold text-white tracking-tight whitespace-nowrap ${compactOnPhone ? "text-[13px] sm:text-[14px]" : "text-[14px]"}`}>
           {COMPANY.name}
         </span>
-        <span className="mt-[3px] font-sans text-[8px] font-semibold uppercase tracking-[0.22em] text-white/40 whitespace-nowrap">
+        <span className={`mt-[3px] font-sans text-[8px] font-semibold uppercase tracking-[0.22em] text-white/40 whitespace-nowrap ${compactOnPhone ? "hidden sm:block" : ""}`}>
           {LEGAL_SUFFIX}
         </span>
       </span>
