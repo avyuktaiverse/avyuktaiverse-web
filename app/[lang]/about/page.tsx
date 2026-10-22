@@ -155,7 +155,7 @@ export default async function AboutPage(props: LangParams) {
                         <div className="flex flex-wrap gap-2">
                           {person.highlights.map((item) => (
                             <span key={item}
-                              className="inline-flex items-center rounded-full border px-3 py-1.5 text-xs font-medium text-white/75 whitespace-nowrap"
+                              className="inline-flex items-center rounded-full border px-3 py-1.5 text-xs font-medium text-white/75 leading-snug max-w-full"
                               style={{ borderColor: "rgba(255,255,255,0.10)", background: "rgba(255,255,255,0.03)" }}>
                               {item}
                             </span>
