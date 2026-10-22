@@ -16,7 +16,7 @@ export function Footer({ lang, t }: { lang: Locale; t: Dictionary }) {
       <div className="mx-auto max-w-6xl px-6 lg:px-8 py-16">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10 pb-10 border-b border-white/[0.05]">
           <div className="md:col-span-2 reveal">
-            <div className="mb-5"><Logo lang={lang} ariaLabel={t.common.logoAria} /></div>
+            <div className="mb-5"><Logo lang={lang} ariaLabel={t.common.logoAria} wordmark="always" /></div>
             <p className="text-sm text-white/40 leading-relaxed max-w-sm mb-5">{t.company.description}</p>
             <p className="text-sm text-white/40 leading-relaxed max-w-sm">{t.company.tagline}</p>
           </div>

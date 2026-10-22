@@ -38,7 +38,7 @@ export function MobileMenu({ lang, links, contactHref, labels }: MobileMenuProps
         <div className="fixed top-0 left-0 w-[100vw] h-[100dvh] z-[100] flex flex-col backdrop-blur-[24px]"
              style={{ backgroundColor: "rgba(7, 5, 20, 0.96)" }}>
           <div className="flex items-center justify-between px-6 h-16 border-b border-white/[0.05]">
-            <Logo lang={lang} ariaLabel={labels.logoAria} />
+            <Logo lang={lang} ariaLabel={labels.logoAria} wordmark="always" />
             <button
               onClick={() => setOpen(false)}
               className="p-2 text-white/60 hover:text-white transition-colors"
