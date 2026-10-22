@@ -25,7 +25,7 @@ export const en = {
 
   founder: {
     name: "Sreedhara GS",
-    role: "Founder & Director",
+    role: "Co-Founder & CEO",
     bio: "Sreedhara is a global engineering leader with 15+ years of experience directing cross-cultural teams across Japan, Australia, Europe, and India — delivering cloud-native platforms, AI-driven infrastructure, and enterprise SaaS products that generate measurable business and financial impact.",
   },
 

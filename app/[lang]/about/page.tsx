@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { Container } from "@/components/layout/container";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { Badge } from "@/components/ui/badge";
 import { ADVISOR, COMPANY, FOUNDER } from "@/lib/constants";
-import { Lightbulb, Rocket, Shield, Clock, User, GraduationCap } from "lucide-react";
+import { Lightbulb, Rocket, Shield, Clock } from "lucide-react";
 import { getDictionary } from "@/lib/i18n/get-dictionary";
 import { resolveLang, type LangParams } from "@/lib/i18n/params";
 import { advisorJsonLd, pageMetadata, personJsonLd } from "@/lib/seo";
@@ -28,8 +29,8 @@ const highlightDots = ["bg-[#CCFF00]", "bg-emerald-400", "bg-[#7EA5FF]", "bg-amb
 
 /** Per-person accent so the two leadership cards read as a pair, not a duplicate. */
 const personAccent = {
-  founder: { Icon: User, color: "#CCFF00", bg: "rgba(204,255,0,0.08)", border: "rgba(204,255,0,0.25)", glow: "0 0 30px rgba(204,255,0,0.18)" },
-  advisor: { Icon: GraduationCap, color: "#7EA5FF", bg: "rgba(126,165,255,0.08)", border: "rgba(126,165,255,0.3)", glow: "0 0 30px rgba(126,165,255,0.22)" },
+  founder: { color: "#CCFF00", ring: "rgba(204,255,0,0.55)", glow: "0 0 48px rgba(204,255,0,0.22)", photo: "/team/sreedhara-gs.jpg" },
+  advisor: { color: "#7EA5FF", ring: "rgba(126,165,255,0.6)", glow: "0 0 48px rgba(126,165,255,0.26)", photo: "/team/kuniaki-kudo.jpg" },
 } as const;
 
 export default async function AboutPage(props: LangParams) {
@@ -135,11 +136,20 @@ export default async function AboutPage(props: LangParams) {
                   <div className="gradient-border-card-inner p-8 lg:p-12">
                     <div className="flex flex-col lg:flex-row gap-10">
                       <div className="lg:w-1/3 flex-shrink-0">
-                        <div className="w-20 h-20 rounded-full flex items-center justify-center mb-6"
-                          style={{ background: accent.bg, border: `1px solid ${accent.border}`, boxShadow: accent.glow }}>
-                          <accent.Icon size={32} style={{ color: accent.color }} />
+                        <div className="relative w-36 h-36 lg:w-40 lg:h-40 rounded-full mb-6 p-[3px]"
+                          style={{ background: `linear-gradient(135deg, ${accent.color}, ${accent.ring} 60%, transparent)`, boxShadow: accent.glow }}>
+                          <Image
+                            src={accent.photo}
+                            alt={`${person.name} — ${person.role}`}
+                            width={320}
+                            height={320}
+                            sizes="(min-width: 1024px) 160px, 144px"
+                            className="w-full h-full rounded-full object-cover object-top"
+                            style={{ border: "3px solid #0B0B1A" }}
+                            priority={idx === 0}
+                          />
                         </div>
-                        <h3 className="font-serif font-bold text-white text-2xl mb-1 mt-4">{person.name}</h3>
+                        <h3 className="font-serif font-bold text-white text-2xl mb-1">{person.name}</h3>
                         <p className={`text-xs mb-6 font-semibold uppercase tracking-widest ${person.key === "founder" ? "gradient-text" : ""}`}
                           style={person.key === "founder" ? undefined : { color: accent.color }}>
                           {person.role}
