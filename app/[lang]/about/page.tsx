@@ -4,7 +4,7 @@ import { Container } from "@/components/layout/container";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { Badge } from "@/components/ui/badge";
 import { ADVISOR, COMPANY, FOUNDER } from "@/lib/constants";
-import { Lightbulb, Rocket, Shield, Clock, GraduationCap } from "lucide-react";
+import { Lightbulb, Rocket, Shield, Clock } from "lucide-react";
 import { getDictionary } from "@/lib/i18n/get-dictionary";
 import { resolveLang, type LangParams } from "@/lib/i18n/params";
 import { advisorJsonLd, pageMetadata, personJsonLd } from "@/lib/seo";
@@ -24,8 +24,6 @@ const valueMeta = [
   { Icon: Shield, color: "#34d399", bg: "rgba(52,211,153,0.08)", borderColor: "rgba(52,211,153,0.15)" },
   { Icon: Clock, color: "#7EA5FF", bg: "rgba(126,165,255,0.08)", borderColor: "rgba(126,165,255,0.2)" },
 ];
-
-const highlightDots = ["bg-[#CCFF00]", "bg-emerald-400", "bg-[#7EA5FF]", "bg-amber-400"];
 
 /** Per-person accent so the two leadership cards read as a pair, not a duplicate. */
 const personAccent = {
@@ -53,8 +51,6 @@ export default async function AboutPage(props: LangParams) {
       highlights: a.leadership.highlights,
       paragraphs: a.leadership.paragraphs,
       stats: a.leadership.stats,
-      educationLabel: undefined,
-      education: [],
     },
   ];
 
@@ -128,7 +124,7 @@ export default async function AboutPage(props: LangParams) {
       <section className="relative py-20 lg:py-28" style={{ background: darkGrad }}>
         <div className="section-divider absolute top-0 left-0 right-0" />
         <Container>
-          <SectionHeading eyebrow={a.leadership.eyebrow} title={a.leadership.title} dark />
+          <SectionHeading eyebrow={a.leadership.eyebrow} title={a.leadership.title} subtitle={a.leadership.subtitle} dark />
           <div className="space-y-8">
             {people.map((person, idx) => {
               const accent = personAccent[person.key];
@@ -156,49 +152,33 @@ export default async function AboutPage(props: LangParams) {
                           style={person.key === "founder" ? undefined : { color: accent.color }}>
                           {person.role}
                         </p>
-                        <div className="flex flex-col gap-3 text-white/50 text-sm">
-                          {person.highlights.map((item, i) => (
-                            <p key={item} className="flex items-center gap-2">
-                              <span className={`w-1.5 h-1.5 rounded-full opacity-80 ${highlightDots[i] ?? highlightDots[0]}`}></span>
+                        <div className="flex flex-wrap gap-2">
+                          {person.highlights.map((item) => (
+                            <span key={item}
+                              className="inline-flex items-center rounded-full border px-3 py-1.5 text-xs font-medium text-white/75 whitespace-nowrap"
+                              style={{ borderColor: "rgba(255,255,255,0.10)", background: "rgba(255,255,255,0.03)" }}>
                               {item}
-                            </p>
+                            </span>
                           ))}
                         </div>
-
-                        {person.education.length > 0 ? (
-                          <div className="mt-8 pt-6 border-t border-white/[0.06]">
-                            <p className="text-[11px] font-sans font-semibold uppercase tracking-widest mb-4" style={{ color: accent.color }}>
-                              {person.educationLabel}
-                            </p>
-                            <ul className="flex flex-col gap-3.5">
-                              {person.education.map((e) => (
-                                <li key={e.degree} className="flex items-start gap-3">
-                                  <GraduationCap size={16} className="mt-0.5 flex-shrink-0" style={{ color: accent.color, opacity: 0.8 }} />
-                                  <div className="leading-snug">
-                                    <p className="text-white/80 text-sm font-medium">{e.degree}</p>
-                                    <p className="text-white/40 text-xs mt-0.5">{e.institution}</p>
-                                  </div>
-                                </li>
-                              ))}
-                            </ul>
-                          </div>
-                        ) : null}
                       </div>
                       <div className="lg:w-2/3 border-t lg:border-t-0 lg:border-l border-white/[0.05] pt-8 lg:pt-0 lg:pl-10">
-                        <h4 className="text-white font-sans font-semibold text-lg mb-4">{person.heading}</h4>
-                        <div className="space-y-4 text-white/60 leading-relaxed text-[15px]">
-                          {person.paragraphs.map((p) => (
-                            <p key={p.slice(0, 24)}>{p}</p>
+                        <h4 className="text-white font-serif font-semibold text-xl lg:text-2xl mb-6 leading-snug">{person.heading}</h4>
+
+                        <div className="grid grid-cols-2 sm:grid-cols-4 gap-y-6 mb-8 py-6 border-y border-white/[0.07]">
+                          {person.stats.map((s, si) => (
+                            <div key={s.label}
+                              className={`px-4 first:pl-0 ${si % 2 === 1 ? "border-l" : "sm:border-l"} ${si === 0 ? "sm:border-l-0" : ""} border-white/[0.08]`}>
+                              <p className="text-3xl lg:text-[2.1rem] font-bold text-white leading-none" style={{ fontFamily: "var(--font-fraunces)", color: si === 0 ? accent.color : undefined }}>{s.value}</p>
+                              <p className="text-[11px] text-white/55 uppercase tracking-widest font-semibold mt-2 leading-snug">{s.label}</p>
+                              {s.note ? <p className="text-[11px] text-white/30 mt-1">{s.note}</p> : null}
+                            </div>
                           ))}
                         </div>
 
-                        <div className="mt-8 grid grid-cols-2 gap-4">
-                          {person.stats.map((s) => (
-                            <div key={s.label} className="p-5 rounded-xl glass-card transition-colors duration-300 hover:bg-white/[0.04]">
-                              <p className="text-3xl font-bold text-white mb-1" style={{ fontFamily: "var(--font-fraunces)" }}>{s.value}</p>
-                              <p className="text-xs text-white/40 uppercase tracking-widest font-semibold">{s.label}</p>
-                              {s.note ? <p className="text-[11px] text-white/25 mt-1">{s.note}</p> : null}
-                            </div>
+                        <div className="space-y-4 text-white/60 leading-relaxed text-[15px]">
+                          {person.paragraphs.map((p, pi) => (
+                            <p key={p.slice(0, 24)} className={pi === 0 ? "text-white/80 text-base lg:text-[17px]" : undefined}>{p}</p>
                           ))}
                         </div>
                       </div>
