@@ -370,7 +370,14 @@ export const en = {
           "35+ Years Across Japan & the US",
           "Enterprise Modernization & DevOps",
           "Apple · Adobe · Sony · Autodesk Alumni",
-          "Ph.D. Researcher, University of Tsukuba",
+          "Ph.D. Candidate · M.S. · MBA · B.S.",
+        ],
+        educationLabel: "Education",
+        education: [
+          { degree: "Ph.D. Candidate, Computer Science", institution: "University of Tsukuba" },
+          { degree: "M.S. Computer Science", institution: "The University of Texas at Austin" },
+          { degree: "MBA", institution: "The University of Manchester" },
+          { degree: "B.S. Mathematics", institution: "Tokyo University of Science" },
         ],
         paragraphs: [
           "Kuniaki is a technology leader with more than three decades of software engineering, system architecture, and engineering leadership across the United States and Japan. He leads global engineering teams through large-scale enterprise system modernization — preserving critical business functionality while introducing DevOps, CI/CD, test automation, cloud infrastructure, and security practices that let legacy systems evolve continuously.",

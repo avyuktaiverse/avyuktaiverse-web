@@ -4,7 +4,7 @@ import { Container } from "@/components/layout/container";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { Badge } from "@/components/ui/badge";
 import { ADVISOR, COMPANY, FOUNDER } from "@/lib/constants";
-import { Lightbulb, Rocket, Shield, Clock } from "lucide-react";
+import { Lightbulb, Rocket, Shield, Clock, GraduationCap } from "lucide-react";
 import { getDictionary } from "@/lib/i18n/get-dictionary";
 import { resolveLang, type LangParams } from "@/lib/i18n/params";
 import { advisorJsonLd, pageMetadata, personJsonLd } from "@/lib/seo";
@@ -53,6 +53,8 @@ export default async function AboutPage(props: LangParams) {
       highlights: a.leadership.highlights,
       paragraphs: a.leadership.paragraphs,
       stats: a.leadership.stats,
+      educationLabel: undefined,
+      education: [],
     },
   ];
 
@@ -162,6 +164,25 @@ export default async function AboutPage(props: LangParams) {
                             </p>
                           ))}
                         </div>
+
+                        {person.education.length > 0 ? (
+                          <div className="mt-8 pt-6 border-t border-white/[0.06]">
+                            <p className="text-[11px] font-sans font-semibold uppercase tracking-widest mb-4" style={{ color: accent.color }}>
+                              {person.educationLabel}
+                            </p>
+                            <ul className="flex flex-col gap-3.5">
+                              {person.education.map((e) => (
+                                <li key={e.degree} className="flex items-start gap-3">
+                                  <GraduationCap size={16} className="mt-0.5 flex-shrink-0" style={{ color: accent.color, opacity: 0.8 }} />
+                                  <div className="leading-snug">
+                                    <p className="text-white/80 text-sm font-medium">{e.degree}</p>
+                                    <p className="text-white/40 text-xs mt-0.5">{e.institution}</p>
+                                  </div>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        ) : null}
                       </div>
                       <div className="lg:w-2/3 border-t lg:border-t-0 lg:border-l border-white/[0.05] pt-8 lg:pt-0 lg:pl-10">
                         <h4 className="text-white font-sans font-semibold text-lg mb-4">{person.heading}</h4>
