@@ -348,10 +348,14 @@ export const en = {
       title: "Who we are.",
       subtitle: "Operating experience from Apple, Adobe, Sony, and Fortune-class enterprises, with the judgement to apply AI where it belongs.",
       highlights: [
-        "15+ Years Global Experience",
-        "AI & Digital Transformation",
-        "Global Talent & Org Building",
-        "Open Source / AI Contributor",
+        "15+ years of engineering leadership · Japan · India",
+        "AI-driven SRE · GenAI integration · cloud-native platforms",
+        "Asahi Group Holdings · SAP Labs · Samsung R&D · Nokia R&D",
+        "Platform for 27,000+ customers · 100+ services · 4 regions",
+        "Trusted technical advisor · Shell · Intel",
+        "B.E. Computer Science · Visvesvaraya Technological University",
+        "AWS Solutions Architect · SAP Solution Architect, certified",
+        "Anthropic AI certifications · Springer LNCS author, 2014",
       ],
       heading: "Engineering leadership that reaches the P&L.",
       paragraphs: [

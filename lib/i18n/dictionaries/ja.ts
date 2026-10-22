@@ -350,10 +350,14 @@ export const ja: Dictionary = {
       title: "私たちについて。",
       subtitle: "Apple、Adobe、Sony、そしてフォーチュン級企業での実務経験と、AIを適切な場所に適用する判断力。",
       highlights: [
-        "15年以上のグローバル経験",
-        "AIとデジタルトランスフォーメーション",
-        "グローバル人材と組織づくり",
-        "オープンソース / AIコントリビューター",
+        "15年以上のエンジニアリングリーダーシップ · 日本・インド",
+        "AI駆動SRE · GenAI統合 · クラウドネイティブ",
+        "Asahi Group Holdings · SAP Labs · Samsung R&D · Nokia R&D",
+        "27,000社以上が利用するプラットフォーム · 100以上のサービス",
+        "テクニカルアドバイザー · Shell · Intel",
+        "学士（コンピュータサイエンス）· Visvesvaraya工科大学",
+        "AWS認定ソリューションアーキテクト · SAP認定ソリューションアーキテクト",
+        "Anthropic AI認定 · Springer LNCS論文著者（2014）",
       ],
       heading: "損益にまで届くエンジニアリングリーダーシップ。",
       paragraphs: [
