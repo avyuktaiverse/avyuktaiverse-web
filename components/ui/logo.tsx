@@ -35,12 +35,12 @@ export function Logo({
       aria-label={ariaLabel}
       title={`APL — ${COMPANY.legalName}`}
     >
-      <AplMark className="h-8 w-auto transition-transform duration-300 group-hover:scale-[1.03]" />
-      <span className={`${wordmarkDisplay} flex-col leading-none ml-3 pl-3 border-l border-white/[0.14]`}>
-        <span className="font-serif font-semibold text-white text-[15px] tracking-tight whitespace-nowrap">
+      <AplMark className="h-7 w-auto transition-transform duration-300 group-hover:scale-[1.03]" />
+      <span className={`${wordmarkDisplay} flex-col leading-none ml-2.5 pl-2.5 border-l border-white/[0.14]`}>
+        <span className="font-serif font-semibold text-white text-[14px] tracking-tight whitespace-nowrap">
           {COMPANY.name}
         </span>
-        <span className="mt-1 font-sans text-[9px] font-semibold uppercase tracking-[0.22em] text-white/40 whitespace-nowrap">
+        <span className="mt-[3px] font-sans text-[8px] font-semibold uppercase tracking-[0.22em] text-white/40 whitespace-nowrap">
           {LEGAL_SUFFIX}
         </span>
       </span>

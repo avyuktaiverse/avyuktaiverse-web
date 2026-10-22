@@ -64,7 +64,7 @@ export default async function AboutPage(props: LangParams) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(advisorJsonLd(lang)) }}
       />
-      <section className="relative overflow-hidden py-24 lg:py-32" style={{ background: heroGrad }}>
+      <section className="relative overflow-hidden py-16 lg:py-22" style={{ background: heroGrad }}>
         <div className="hero-shape w-[380px] h-[380px]"
           style={{ background: "#7EA5FF", opacity: 0.08, top: "-80px", right: "-60px", animation: "float-slow 9s ease-in-out infinite" }} />
         <div className="hero-shape w-[260px] h-[260px]"
@@ -79,7 +79,7 @@ export default async function AboutPage(props: LangParams) {
         <Container className="relative z-10">
           <div className="max-w-2xl">
             <Badge variant="pulse" className="mb-6">{a.badge}</Badge>
-            <h1 className="font-serif font-bold text-white mb-5" style={{ fontSize: "clamp(2.4rem, 6vw, 4rem)" }}>
+            <h1 className="font-serif font-bold text-white mb-5" style={{ fontSize: "clamp(2.25rem, 4.5vw, 3.5rem)" }}>
               {a.titleStart}<span className="gradient-text italic">{a.titleAccent}</span>{a.titleEnd}
             </h1>
             <p className="text-lg text-white/50 leading-relaxed">{a.lead}</p>

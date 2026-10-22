@@ -23,7 +23,7 @@ export default async function ContactPage(props: LangParams) {
 
   return (
     <>
-      <section className="relative overflow-hidden py-24 lg:py-32" style={{ background: heroGrad }}>
+      <section className="relative overflow-hidden py-16 lg:py-22" style={{ background: heroGrad }}>
         <div className="hero-shape w-[380px] h-[380px]"
           style={{ background: "#1B3A4B", opacity: 0.1, top: "-80px", right: "-60px", animation: "float 7s ease-in-out infinite" }} />
         <div className="hero-shape w-[220px] h-[220px]"
@@ -38,7 +38,7 @@ export default async function ContactPage(props: LangParams) {
         <Container className="relative z-10">
           <div className="max-w-2xl">
             <Badge variant="pulse" className="mb-6">{c.badge}</Badge>
-            <h1 className="font-serif font-bold text-white mb-5" style={{ fontSize: "clamp(2.4rem, 6vw, 4rem)" }}>
+            <h1 className="font-serif font-bold text-white mb-5" style={{ fontSize: "clamp(2.25rem, 4.5vw, 3.5rem)" }}>
               {c.titleStart}<span className="gradient-text italic">{c.titleAccent}</span>{c.titleEnd}
             </h1>
             <p className="text-lg text-white/50 leading-relaxed">{c.lead}</p>

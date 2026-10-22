@@ -16,12 +16,12 @@ export function Header({ lang, t }: { lang: Locale; t: Dictionary }) {
         <div className="flex items-center justify-between h-16">
           <Logo lang={lang} ariaLabel={t.common.logoAria} />
 
-          <nav className="hidden lg:flex items-center gap-8" aria-label={t.nav.mainAria}>
+          <nav className="hidden lg:flex items-center gap-7" aria-label={t.nav.mainAria}>
             {t.nav.links.map((link) => (
               <Link
                 key={link.href}
                 href={withLocale(lang, link.href)}
-                className="font-sans text-sm font-medium text-white/50 hover:text-white transition-colors duration-200 relative group"
+                className="font-sans text-[14px] font-medium text-white/60 hover:text-white transition-colors duration-200 relative group"
               >
                 {link.label}
                 <span className="absolute -bottom-1 left-0 w-0 h-px bg-accent group-hover:w-full transition-all duration-300" />

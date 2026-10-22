@@ -51,7 +51,7 @@ export default async function InsightsPage(props: LangParams) {
             <Sparkles size={12} className="mr-1.5" />
             {s.badge}
           </Badge>
-          <h1 className="font-serif font-bold text-white mb-4" style={{ fontSize: "clamp(2.5rem, 5vw, 4.5rem)" }}>
+          <h1 className="font-serif font-bold text-white mb-4" style={{ fontSize: "clamp(2.25rem, 4.5vw, 3.75rem)" }}>
             <span className="gradient-text italic">{s.title}</span>
           </h1>
           <p className="text-lg text-white/40 max-w-xl mx-auto">{s.lead}</p>
