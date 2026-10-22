@@ -40,6 +40,12 @@ export default async function AboutPage(props: LangParams) {
 
   const people = [
     {
+      key: "advisor" as const,
+      name: ADVISOR.name,
+      role: t.advisor.role,
+      ...a.leadership.advisor,
+    },
+    {
       key: "founder" as const,
       name: FOUNDER.name,
       role: t.founder.role,
@@ -47,12 +53,6 @@ export default async function AboutPage(props: LangParams) {
       highlights: a.leadership.highlights,
       paragraphs: a.leadership.paragraphs,
       stats: a.leadership.stats,
-    },
-    {
-      key: "advisor" as const,
-      name: ADVISOR.name,
-      role: t.advisor.role,
-      ...a.leadership.advisor,
     },
   ];
 
