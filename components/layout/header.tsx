@@ -12,7 +12,7 @@ export function Header({ lang, t }: { lang: Locale; t: Dictionary }) {
     <header className="sticky top-0 z-40 backdrop-blur-xl border-b border-white/[0.04]"
       style={{ background: "rgba(12, 10, 29, 0.8)" }}
     >
-      <div className="mx-auto max-w-6xl px-6 lg:px-8">
+      <div className="mx-auto max-w-6xl px-5 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <Logo lang={lang} ariaLabel={t.common.logoAria} />
 
