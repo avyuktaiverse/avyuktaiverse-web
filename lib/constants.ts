@@ -33,3 +33,8 @@ export const FOUNDER = {
 export const ADVISOR = {
   name: "Kuniaki Kudo",
 } as const;
+
+// TODO(GS): replace with the Head of QA's full name before merging.
+export const QA_LEAD = {
+  name: "[Name TBD]",
+} as const;

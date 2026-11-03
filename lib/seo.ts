@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { ADVISOR, COMPANY, FOUNDER } from "@/lib/constants";
+import { ADVISOR, COMPANY, FOUNDER, QA_LEAD } from "@/lib/constants";
 import { localeTags, type Locale } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/get-dictionary";
 import { alternatesFor, withLocale } from "@/lib/i18n/paths";
@@ -39,6 +39,12 @@ export function organizationJsonLd(lang: Locale) {
         name: ADVISOR.name,
         jobTitle: t.advisor.role,
         description: t.advisor.bio,
+      },
+      {
+        "@type": "Person",
+        name: QA_LEAD.name,
+        jobTitle: t.qaLead.role,
+        description: t.qaLead.bio,
       },
     ],
     sameAs: COMPANY.linkedin ? [COMPANY.linkedin] : [],
@@ -108,4 +114,12 @@ export function pageMetadata(
       locale: localeTags[lang].og,
     },
   };
+}
+
+/**
+ * Person JSON-LD for the Head of Quality Assurance — used on /about.
+ */
+export function qaLeadJsonLd(lang: Locale) {
+  const t = getDictionary(lang);
+  return personSchema({ name: QA_LEAD.name, role: t.qaLead.role, bio: t.qaLead.bio });
 }

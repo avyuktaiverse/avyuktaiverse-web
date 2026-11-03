@@ -35,6 +35,11 @@ export const en = {
     bio: "Kuniaki is a technology leader with 35+ years of software engineering and engineering leadership across the United States and Japan — from Apple, Adobe, Sony, and Autodesk to leading large-scale enterprise modernization, DevOps, and quality engineering, alongside doctoral research on the continuous modernization of enterprise systems.",
   },
 
+  qaLead: {
+    role: "Head of Quality Assurance",
+    bio: "A quality engineering leader with 10+ years across manual and automation testing, AI-driven testing, cloud, and CI/CD architecture — delivering quality for high-traffic social platforms including Facebook, WhatsApp, and Instagram, and for complex healthcare and medical ERP systems.",
+  },
+
   common: {
     skipToContent: "Skip to content",
     getInTouch: "Get in Touch",
@@ -399,6 +404,29 @@ export const en = {
           { value: "10+", label: "Global Tech Companies", note: "Apple · Adobe · Sony · Autodesk" },
           { value: "2", label: "Peer-Reviewed Papers", note: "IEICE & IISA, 2026" },
           { value: "2", label: "University R&D Partnerships", note: "UC Irvine · Manchester" },
+        ],
+      },
+      qaLead: {
+        heading: "Quality engineered in, not inspected at the end.",
+        highlights: [
+          "10+ years in software quality engineering",
+          "QA automation & engineering leadership",
+          "Facebook · WhatsApp · Instagram",
+          "Healthcare & medical ERP systems",
+          "Web · Mobile · API · Performance testing",
+          "AI-driven testing · Cloud · CI/CD architecture",
+          "Scalable test automation framework design",
+        ],
+        paragraphs: [
+          "A quality assurance leader with more than a decade in software quality engineering, he treats quality as an engineering discipline rather than a final checkpoint. His work spans manual and automation testing, AI-driven testing, cloud technologies, and the CI/CD architecture that ties them together.",
+          "He has delivered quality for large-scale, high-traffic social media platforms, including Facebook, WhatsApp, and Instagram, as well as complex healthcare and medical ERP systems. His strengths lie in designing scalable automation frameworks, leading QA teams, and driving end-to-end quality engineering across web, mobile, API, and performance testing.",
+          "At AvyuktAIverse® he leads quality across every engagement, building automation and AI-assisted testing into delivery pipelines from day one. He is passionate about using AI, automation, and cloud to accelerate delivery, raise engineering productivity, optimize infrastructure, and cut operational costs, without ever trading away the quality that users feel.",
+        ],
+        stats: [
+          { value: "10+", label: "Years in Quality Engineering", note: "" },
+          { value: "3", label: "Global Social Platforms", note: "Facebook · WhatsApp · Instagram" },
+          { value: "4", label: "Testing Disciplines", note: "Web · Mobile · API · Performance" },
+          { value: "2", label: "Industry Domains", note: "Social media · Healthcare ERP" },
         ],
       },
     },

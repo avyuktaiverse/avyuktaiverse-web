@@ -4,11 +4,11 @@ import { Container } from "@/components/layout/container";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { Badge } from "@/components/ui/badge";
 import { SectionNav } from "@/components/ui/section-nav";
-import { ADVISOR, COMPANY, FOUNDER } from "@/lib/constants";
+import { ADVISOR, COMPANY, FOUNDER, QA_LEAD } from "@/lib/constants";
 import { Lightbulb, Rocket, Shield, Clock } from "lucide-react";
 import { getDictionary } from "@/lib/i18n/get-dictionary";
 import { resolveLang, type LangParams } from "@/lib/i18n/params";
-import { advisorJsonLd, pageMetadata, personJsonLd } from "@/lib/seo";
+import { advisorJsonLd, pageMetadata, personJsonLd, qaLeadJsonLd } from "@/lib/seo";
 
 export async function generateMetadata(props: LangParams): Promise<Metadata> {
   const lang = await resolveLang(props);
@@ -26,10 +26,11 @@ const valueMeta = [
   { Icon: Clock, color: "#7EA5FF", bg: "rgba(126,165,255,0.08)", borderColor: "rgba(126,165,255,0.2)" },
 ];
 
-/** Per-person accent so the two leadership cards read as a pair, not a duplicate. */
+/** Per-person accent so each leadership card reads as its own, not a duplicate. */
 const personAccent = {
   founder: { color: "#CCFF00", ring: "rgba(204,255,0,0.55)", glow: "0 0 48px rgba(204,255,0,0.22)", photo: "/team/sreedhara-gs.jpg" },
   advisor: { color: "#7EA5FF", ring: "rgba(126,165,255,0.6)", glow: "0 0 48px rgba(126,165,255,0.26)", photo: "/team/kuniaki-kudo.jpg" },
+  qaLead: { color: "#34d399", ring: "rgba(52,211,153,0.55)", glow: "0 0 48px rgba(52,211,153,0.22)", photo: "/team/head-of-qa.jpg" },
 } as const;
 
 export default async function AboutPage(props: LangParams) {
@@ -53,6 +54,12 @@ export default async function AboutPage(props: LangParams) {
       paragraphs: a.leadership.paragraphs,
       stats: a.leadership.stats,
     },
+    {
+      key: "qaLead" as const,
+      name: QA_LEAD.name,
+      role: t.qaLead.role,
+      ...a.leadership.qaLead,
+    },
   ];
 
   return (
@@ -64,6 +71,10 @@ export default async function AboutPage(props: LangParams) {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(advisorJsonLd(lang)) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(qaLeadJsonLd(lang)) }}
       />
       <section className="relative overflow-hidden py-16 lg:py-22" style={{ background: heroGrad }}>
         <div className="hero-shape w-[380px] h-[380px]"
