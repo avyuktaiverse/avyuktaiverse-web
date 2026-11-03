@@ -418,7 +418,7 @@ export const en = {
           "Scalable test automation framework design",
         ],
         paragraphs: [
-          "A quality assurance leader with more than a decade in software quality engineering, he treats quality as an engineering discipline rather than a final checkpoint. His work spans manual and automation testing, AI-driven testing, cloud technologies, and the CI/CD architecture that ties them together.",
+          "Ravirajsinh is a quality assurance leader with more than a decade in software quality engineering, who treats quality as an engineering discipline rather than a final checkpoint. His work spans manual and automation testing, AI-driven testing, cloud technologies, and the CI/CD architecture that ties them together.",
           "He has delivered quality for large-scale, high-traffic social media platforms, including Facebook, WhatsApp, and Instagram, as well as complex healthcare and medical ERP systems. His strengths lie in designing scalable automation frameworks, leading QA teams, and driving end-to-end quality engineering across web, mobile, API, and performance testing.",
           "At AvyuktAIverse® he leads quality across every engagement, building automation and AI-assisted testing into delivery pipelines from day one. He is passionate about using AI, automation, and cloud to accelerate delivery, raise engineering productivity, optimize infrastructure, and cut operational costs, without ever trading away the quality that users feel.",
         ],
